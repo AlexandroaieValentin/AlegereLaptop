@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1743965046 source:e:\poo\alegeremodellaptop\main.cpp
+	<iostream>
+	<string>
+	<limits>
+	"Laptop.h"
+	"Catalog.h"
+	"Review.h"
+
+1743965058 e:\poo\alegeremodellaptop\include\laptop.h
+	<string>
+	<vector>
+	"Review.h"
+
+1743965069 e:\poo\alegeremodellaptop\include\review.h
+	<string>
+	<iostream>
+
+1743964692 e:\poo\alegeremodellaptop\include\catalog.h
+	<vector>
+	"Laptop.h"
+
+1743964697 source:e:\poo\alegeremodellaptop\src\catalog.cpp
+	"Catalog.h"
+	<iostream>
+	<algorithm>
+
+1743964687 source:e:\poo\alegeremodellaptop\src\laptop.cpp
+	"Laptop.h"
+	<iostream>
+	<iomanip>
+
+1743964671 source:e:\poo\alegeremodellaptop\src\review.cpp
+	"Review.h"
+
