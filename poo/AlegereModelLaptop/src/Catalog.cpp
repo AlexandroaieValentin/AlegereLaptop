@@ -1,6 +1,7 @@
 #include "Catalog.h"
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 using namespace std;
 
 void Catalog::adaugaLaptop(const Laptop &laptop) {
@@ -27,3 +28,107 @@ void Catalog::sorteazaDupaPret() {
         return a.getPret() < b.getPret();
     });
 }
+void Catalog::salveazaInFisier(const string& numeFisier) const {
+    ofstream fout(numeFisier);
+
+    for (const auto& laptop : laptopuri) {
+        fout << laptop.getBrand() << "\n";
+        fout << laptop.getModel() << "\n";
+        fout << laptop.getPret() << "\n";
+        fout << laptop.getProcesor() << "\n";
+        fout << laptop.getMemorieRAM() << "\n";
+        fout << laptop.getStocare() << "\n";
+        fout << laptop.getRezolutieEcran() << "\n";
+        fout << laptop.getPlacaGrafica() << "\n";
+        fout << laptop.getBaterie() << "\n";
+
+
+        fout << laptop.getReviews().size() << "\n";
+        for (const auto& review : laptop.getReviews()) {
+            fout << review.getRating() << "\n";
+            fout << review.getComment() << "\n";
+        }
+    }
+
+    fout.close();
+}
+
+void Catalog::incarcaDinFisier(const string &numeFisier) {
+    ifstream fin(numeFisier);
+    string brand, model, procesor, rezolutie, placaGrafica, baterie;
+    double pret;
+    int memorieRAM, stocare;
+
+    while (getline(fin, brand) &&
+           getline(fin, model) &&
+           fin >> pret &&
+           fin.ignore() &&
+           getline(fin, procesor) &&
+           fin >> memorieRAM &&
+           fin.ignore() &&
+           fin >> stocare &&
+           fin.ignore() &&
+           getline(fin, rezolutie) &&
+           getline(fin, placaGrafica) &&
+           getline(fin, baterie)) {
+
+        Laptop l(brand, model, pret, procesor, memorieRAM, stocare, rezolutie, placaGrafica, baterie);
+
+        int nrReviewuri;
+        if (fin >> nrReviewuri) {
+            fin.ignore();
+            for (int i = 0; i < nrReviewuri; ++i) {
+                int rating;
+                string comentariu;
+                fin >> rating;
+                fin.ignore();
+                getline(fin, comentariu);
+                l.adaugaReview(Review(rating, comentariu));
+            }
+        } else {
+            fin.clear();
+        }
+
+        laptopuri.push_back(l);
+    }
+}
+
+
+vector<Laptop>& Catalog::getLaptopuri() {
+    return laptopuri;
+}
+vector<Laptop> Catalog::filtreazaDupaBrand(const string& brand) const {
+    vector<Laptop> rezultate;
+    for (const auto& laptop : laptopuri) {
+        if (laptop.getBrand() == brand)
+            rezultate.push_back(laptop);
+    }
+    return rezultate;
+}
+
+vector<Laptop> Catalog::filtreazaDupaProcesor(const string& procesor) const {
+    vector<Laptop> rezultate;
+    for (const auto& laptop : laptopuri) {
+        if (laptop.getProcesor() == procesor)
+            rezultate.push_back(laptop);
+    }
+    return rezultate;
+}
+vector<Laptop> Catalog::filtreazaDupaRAM(int memorieRAM) const {
+    vector<Laptop> rezultate;
+    for (const auto& laptop : laptopuri) {
+        if (laptop.getMemorieRAM() == memorieRAM)
+            rezultate.push_back(laptop);
+    }
+    return rezultate;
+}
+
+vector<Laptop> Catalog::filtreazaDupaPlacaVideo(const string& placaVideo) const {
+    vector<Laptop> rezultate;
+    for (const auto& laptop : laptopuri) {
+        if (laptop.getPlacaGrafica() == placaVideo)
+            rezultate.push_back(laptop);
+    }
+    return rezultate;
+}
+

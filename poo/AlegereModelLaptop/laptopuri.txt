@@ -1,0 +1,112 @@
+Dell
+Inspirion 111
+2500
+AMD Ryzen 5 5600F
+16
+512
+1920x1080
+RTX 3060
+4100
+0
+HP
+Pavilion 14
+2899.99
+Intel Core i3-1115G4
+8
+256
+1920x1080
+Intel UHD
+4000 mAh
+0
+Samsung
+Galaxy Book
+3199
+Intel Core i5-1135G7
+8
+256
+1920x1080
+Intel Iris Xe
+4400 mAh
+0
+Dell
+Inspiron 15
+3200.5
+Intel Core i5-1135G7
+8
+512
+1920x1080
+Intel Iris Xe
+4500 mAh
+0
+Acer
+Swift 3
+3599
+AMD Ryzen 7 5700U
+16
+512
+1920x1080
+AMD Radeon
+4500 mAh
+0
+Asus
+VivoBook S15
+3999.5
+Intel Core i7-1165G7
+16
+1024
+1920x1080
+NVIDIA MX350
+5000 mAh
+0
+Lenovo
+ThinkPad E14
+4399
+AMD Ryzen 5 5500U
+16
+512
+1920x1080
+AMD Radeon
+4700 mAh
+0
+MSI
+Modern 14
+4499
+Intel Core i7-1255U
+16
+512
+1920x1080
+Intel Iris Xe
+4500 mAh
+0
+Apple
+MacBook Air M1
+5999
+Apple M1
+8
+256
+2560x1600
+Apple GPU
+4300 mAh
+1
+2
+bun
+Gigabyte
+Aero 15 OLED
+7999
+Intel Core i9-11980HK
+32
+1024
+3840x2160
+NVIDIA RTX 3080
+6000 mAh
+0
+Huawei
+MateBook D15
+399500
+AMD Ryzen 5 5500U
+8
+512
+1920x1080
+AMD Radeon
+4200 mAh
+0

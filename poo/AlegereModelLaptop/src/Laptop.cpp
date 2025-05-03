@@ -3,6 +3,7 @@
 #include <iomanip>
 using namespace std;
 
+
 Laptop::Laptop(string brand, string model, double pret, string procesor,
                int memorieRAM, int stocare, string rezolutieEcran, string placaGrafica,
                string baterie)
@@ -33,13 +34,23 @@ void Laptop::afiseazaInfo() const {
     cout << "Rezolutie Ecran: " << rezolutieEcran << "\n";
     cout << "Placa Grafica: " << placaGrafica << "\n";
     cout << "Baterie: " << baterie << "\n";
+
     double ratingMediu = calculeazaRatingMediu();
     if (ratingMediu > 0)
         cout << "Rating mediu: " << fixed << setprecision(2) << ratingMediu << "/5\n";
     else
         cout << "Fara evaluari\n";
+
+    if (!reviews.empty()) {
+        cout << "Review-uri:\n";
+        for (const auto& r : reviews) {
+            r.afiseazaReview();
+        }
+    }
+
     cout << "---------------------\n";
 }
+
 
 double Laptop::getPret() const {
     return pret;
@@ -48,3 +59,10 @@ double Laptop::getPret() const {
 string Laptop::getBrand() const {
     return brand;
 }
+string Laptop::getModel() const { return model; }
+string Laptop::getProcesor() const { return procesor; }
+int Laptop::getMemorieRAM() const { return memorieRAM; }
+int Laptop::getStocare() const { return stocare; }
+string Laptop::getRezolutieEcran() const { return rezolutieEcran; }
+string Laptop::getPlacaGrafica() const { return placaGrafica; }
+string Laptop::getBaterie() const { return baterie; }

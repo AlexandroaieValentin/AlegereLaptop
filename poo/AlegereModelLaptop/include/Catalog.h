@@ -13,7 +13,14 @@ public:
     void adaugaLaptop(const Laptop &laptop);
     void afiseazaCatalog() const;
     vector<Laptop> filtreazaDuPret(double pretMaxim) const;
+    void salveazaInFisier(const string &numeFisier) const;
+    void incarcaDinFisier(const string &numeFisier);
+    vector<Laptop>& getLaptopuri();
     void sorteazaDupaPret();
+    vector<Laptop> filtreazaDupaBrand(const string& brand) const;
+    vector<Laptop> filtreazaDupaProcesor(const string& procesor) const;
+    vector<Laptop> filtreazaDupaRAM(int memorieRAM) const;
+    vector<Laptop> filtreazaDupaPlacaVideo(const string& placaVideo) const;
 };
 
 #endif // CATALOG_H
