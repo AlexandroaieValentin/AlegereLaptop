@@ -9,9 +9,43 @@ void Catalog::adaugaLaptop(const Laptop &laptop) {
 }
 
 void Catalog::afiseazaCatalog() const {
-    for (const auto &laptop : laptopuri) {
-        laptop.afiseazaInfo();
+    const int laptopuriPePagina = 5;
+    int total = laptopuri.size();
+    int paginaCurenta = 0;
+    char optiune;
+
+    if (total == 0) {
+        cout << "Catalogul este gol.\n";
+        return;
     }
+
+    do {
+        system("cls"); // curăță ecranul (pe Windows).
+        int start = paginaCurenta * laptopuriPePagina;
+        int end = min(start + laptopuriPePagina, total);
+
+        cout << "\n--- Afisare Laptopuri (pagina " << paginaCurenta + 1 << " din " << (total + laptopuriPePagina - 1) / laptopuriPePagina << ") ---\n\n";
+
+        for (int i = start; i < end; ++i) {
+            cout << "Laptop #" << i + 1 << ":\n";
+            laptopuri[i].afiseazaInfo();
+            cout << "-------------------------------\n";
+        }
+
+        cout << "[n] Pagina urmatoare | [p] Pagina anterioara | [x] Iesire afisare\n";
+        cout << "Alege optiune: ";
+        cin >> optiune;
+        optiune = tolower(optiune);
+
+        if (optiune == 'n' && end < total) {
+            ++paginaCurenta;
+        } else if (optiune == 'p' && paginaCurenta > 0) {
+            --paginaCurenta;
+        } else if (optiune != 'x') {
+            cout << "Optiune invalida.\n";
+        }
+
+    } while (optiune != 'x');
 }
 
 vector<Laptop> Catalog::filtreazaDuPret(double pretMaxim) const {
@@ -26,6 +60,11 @@ vector<Laptop> Catalog::filtreazaDuPret(double pretMaxim) const {
 void Catalog::sorteazaDupaPret() {
     sort(laptopuri.begin(), laptopuri.end(), [](const Laptop &a, const Laptop &b) {
         return a.getPret() < b.getPret();
+    });
+}
+void Catalog::sorteazaDupaPretDescrescator() {
+    sort(laptopuri.begin(), laptopuri.end(), [](const Laptop &a, const Laptop &b) {
+        return a.getPret() > b.getPret();
     });
 }
 void Catalog::salveazaInFisier(const string& numeFisier) const {
@@ -131,4 +170,5 @@ vector<Laptop> Catalog::filtreazaDupaPlacaVideo(const string& placaVideo) const 
     }
     return rezultate;
 }
+
 

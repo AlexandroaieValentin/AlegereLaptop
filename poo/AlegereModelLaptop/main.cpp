@@ -8,6 +8,65 @@
 #include <sstream>
 using namespace std;
 
+void clearConsole() {
+system("cls");
+}
+
+void afiseazaMeniuPrincipal() {
+    cout << "\n";
+    cout << "+-----------------------------------------------+\n";
+    cout << "|         CATALOGUL DE LAPTOPURI - LOGIN        |\n";
+    cout << "+-----------------------------------------------+\n";
+    cout << "| Alege un rol pentru a continua:               |\n";
+    cout << "|                                               |\n";
+    cout << "|  1. Administrator                             |\n";
+    cout << "|  2. Utilizator                                |\n";
+    cout << "|  3. Iesire                                    |\n";
+    cout << "+-----------------------------------------------+\n";
+    cout << ">> Introdu rolul: ";
+}
+
+
+void afiseazaMeniuAdministrator() {
+    cout << "\n";
+    cout << "+------------------------------------------------------+\n";
+    cout << "|                  MENIU ADMINISTRATOR                 |\n";
+    cout << "+------------------------------------------------------+\n";
+    cout << "|  1. Adauga un laptop                                 |\n";
+    cout << "|  2. Afiseaza catalogul complet                       |\n";
+    cout << "|  3. Sorteaza catalogul dupa pret (crescator)         |\n";
+    cout << "|  4. Cauta laptopuri dupa pret maxim                  |\n";
+    cout << "|  5. Salveaza catalogul in fisier                     |\n";
+    cout << "|  6. Schimba rolul                                    |\n";
+    cout << "|  7. Iesire din program                               |\n";
+    cout << "+------------------------------------------------------+\n";
+    cout << ">> Alege optiunea: ";
+}
+
+
+void afiseazaMeniuUtilizator() {
+    cout << "\n";
+    cout << "+------------------------------------------------------+\n";
+    cout << "|                   MENIU UTILIZATOR                   |\n";
+    cout << "+------------------------------------------------------+\n";
+    cout << "|  1. Afiseaza catalogul complet                       |\n";
+    cout << "|  2. Sorteaza dupa pret (crescator)                   |\n";
+    cout << "|  3. Sorteaza dupa pret (descrescator)                |\n";
+    cout << "|  4. Cauta dupa pret maxim                            |\n";
+    cout << "|  5. Cauta dupa brand                                 |\n";
+    cout << "|  6. Cauta dupa procesor                              |\n";
+    cout << "|  7. Cauta dupa memorie RAM                           |\n";
+    cout << "|  8. Cauta dupa placa video                           |\n";
+    cout << "|  9. Salveaza review-urile in fisier                  |\n";
+    cout << "| 10. Adauga review la un laptop                       |\n";
+    cout << "| 11. Schimba rolul                                    |\n";
+    cout << "| 12. Iesire din program                               |\n";
+    cout << "+------------------------------------------------------+\n";
+    cout << ">> Alege optiunea: ";
+}
+
+
+
 Laptop citesteLaptop()
 {
     string brand, model, procesor, rezolutie, placaGrafica, baterieStr;
@@ -117,15 +176,8 @@ void meniuAdministrator(Catalog& catalog)
     bool ruleaza = true;
     while (ruleaza)
     {
-        cout << "\nMeniu (administrator):\n";
-        cout << "1. Adauga un laptop\n";
-        cout << "2. Afiseaza catalogul complet\n";
-        cout << "3. Sorteaza catalogul dupa pret (crescator)\n";
-        cout << "4. Cauta laptopuri dupa pret maxim\n";
-        cout << "5. Salveaza catalogul in fisier\n";
-        cout << "6. Schimba rolul\n";
-        cout << "7. Iesire din program\n";
-        cout << "Alege optiunea: ";
+        afiseazaMeniuAdministrator();
+
         cin >> optiune;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -166,6 +218,7 @@ void meniuAdministrator(Catalog& catalog)
             cout << "Catalog salvat in fisier.\n";
             break;
         case 6:
+            clearConsole();
             ruleaza = false;
             break;
         case 7:
@@ -182,19 +235,8 @@ void meniuUtilizator(Catalog& catalog)
     bool ruleaza = true;
     while (ruleaza)
     {
-        cout << "\nMeniu (utilizator):\n";
-        cout << "1. Afiseaza catalogul complet\n";
-        cout << "2. Sorteaza catalogul dupa pret (crescator)\n";
-        cout << "3. Cauta laptopuri dupa pret maxim\n";
-        cout << "4. Cauta laptopuri dupa brand\n";
-        cout << "5. Cauta laptopuri dupa procesor\n";
-        cout << "6. Cauta laptopuri dupa memorie RAM\n";
-        cout << "7. Cauta laptopuri dupa placa video\n";
-        cout << "8. Salveaza review-urile in fisier\n";
-        cout << "9. Adauga review la un laptop\n";
-        cout << "10. Schimba rolul\n";
-        cout << "11. Iesire din program\n";
-        cout << "Alege optiunea: ";
+        afiseazaMeniuUtilizator();
+
         cin >> optiune;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -205,9 +247,13 @@ void meniuUtilizator(Catalog& catalog)
             break;
         case 2:
             catalog.sorteazaDupaPret();
-            cout << "Catalogul a fost sortat dupa pret.\n";
+            cout << "Catalogul a fost sortat crescator.\n";
             break;
         case 3:
+            catalog.sorteazaDupaPretDescrescator();
+            cout << "Catalogul a fost sortat descrescator.\n";
+            break;
+        case 4:
         {
             double pretMaxim;
             cout << "Introdu pretul maxim: ";
@@ -231,7 +277,7 @@ void meniuUtilizator(Catalog& catalog)
             break;
         }
 
-        case 4:
+        case 5:
         {
             string brand;
             cout << "Introdu brandul: ";
@@ -241,7 +287,7 @@ void meniuUtilizator(Catalog& catalog)
             else for (const auto& lap : rezultate) lap.afiseazaInfo();
             break;
         }
-        case 5:
+        case 6:
         {
             string proc;
             cout << "Introdu procesorul: ";
@@ -251,7 +297,7 @@ void meniuUtilizator(Catalog& catalog)
             else for (const auto& lap : rezultate) lap.afiseazaInfo();
             break;
         }
-        case 6:
+        case 7:
         {
             int ram;
             cout << "Introdu cantitatea de RAM (GB): ";
@@ -273,7 +319,7 @@ void meniuUtilizator(Catalog& catalog)
             break;
         }
 
-        case 7:
+        case 8:
         {
             string gpu;
             cout << "Introdu denumirea placii video: ";
@@ -283,11 +329,11 @@ void meniuUtilizator(Catalog& catalog)
             else for (const auto& lap : rezultate) lap.afiseazaInfo();
             break;
         }
-        case 8:
+        case 9:
             catalog.salveazaInFisier("laptopuri.txt");
             cout << "Review-urile au fost salvate.\n";
             break;
-        case 9:
+        case 10:
         {
             string brand, model;
             cout << "Introdu brandul laptopului: ";
@@ -324,10 +370,11 @@ void meniuUtilizator(Catalog& catalog)
             break;
         }
 
-        case 10:
+        case 11:
+            clearConsole();
             ruleaza = false;
             break;
-        case 11:
+        case 12:
             exit(0);
 
 
@@ -345,7 +392,7 @@ int main()
     while (true)
     {
         string rol;
-        cout << "\nTe rog introdu rolul tau (administrator / utilizator / iesire): ";
+        afiseazaMeniuPrincipal();
         getline(cin, rol);
 
         if (rol == "iesire")
@@ -355,10 +402,12 @@ int main()
         }
         else if (rol == "administrator")
         {
+            clearConsole();
             meniuAdministrator(catalog);
         }
         else if (rol == "utilizator")
         {
+            clearConsole();
             meniuUtilizator(catalog);
         }
         else

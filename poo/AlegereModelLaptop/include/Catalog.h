@@ -17,6 +17,7 @@ public:
     void incarcaDinFisier(const string &numeFisier);
     vector<Laptop>& getLaptopuri();
     void sorteazaDupaPret();
+    void sorteazaDupaPretDescrescator();
     vector<Laptop> filtreazaDupaBrand(const string& brand) const;
     vector<Laptop> filtreazaDupaProcesor(const string& procesor) const;
     vector<Laptop> filtreazaDupaRAM(int memorieRAM) const;
