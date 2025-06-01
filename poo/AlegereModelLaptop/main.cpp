@@ -253,82 +253,61 @@ void meniuUtilizator(Catalog& catalog)
             catalog.sorteazaDupaPretDescrescator();
             cout << "Catalogul a fost sortat descrescator.\n";
             break;
-        case 4:
-        {
-            double pretMaxim;
-            cout << "Introdu pretul maxim: ";
-            if (!(cin >> pretMaxim))
-            {
-                cout << "Eroare: Trebuie sa introduci un numar valid pentru pretul maxim!\n";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                break;
-            }
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        case 4: {
+    double pretMaxim;
+    cout << "Introdu pretul maxim: ";
+    cin >> pretMaxim;
+    cin.ignore(); // important!
+    auto rezultate = catalog.filtreazaDuPret(pretMaxim);
+    if (rezultate.empty()) cout << "Nu s-au gasit laptopuri sub pretul de " << pretMaxim << ".\n";
+    else catalog.afiseazaLaptopuriPaginat(rezultate);
+    break;
+}
 
-            auto laptopuriGasite = catalog.filtreazaDuPret(pretMaxim);
-            if (laptopuriGasite.empty())
-                cout << "Nu s-au gasit laptopuri sub pretul " << pretMaxim << " lei.\n";
-            else
-            {
-                cout << "\nLaptopurile gasite:\n";
-                for (const auto& lap : laptopuriGasite) lap.afiseazaInfo();
-            }
-            break;
-        }
 
         case 5:
         {
             string brand;
-            cout << "Introdu brandul: ";
-            getline(cin, brand);
-            auto rezultate = catalog.filtreazaDupaBrand(brand);
-            if (rezultate.empty()) cout << "Nu s-au gasit laptopuri cu brandul " << brand << ".\n";
-            else for (const auto& lap : rezultate) lap.afiseazaInfo();
-            break;
+    cout << "Introdu brandul: ";
+    getline(cin, brand);
+    auto rezultate = catalog.filtreazaDupaBrand(brand);
+    if (rezultate.empty())
+        cout << "Nu s-au gasit laptopuri cu brandul " << brand << ".\n";
+    else
+        catalog.afiseazaLaptopuriPaginat(rezultate);
+    break;
         }
-        case 6:
-        {
-            string proc;
-            cout << "Introdu procesorul: ";
-            getline(cin, proc);
-            auto rezultate = catalog.filtreazaDupaProcesor(proc);
-            if (rezultate.empty()) cout << "Nu s-au gasit laptopuri cu procesorul " << proc << ".\n";
-            else for (const auto& lap : rezultate) lap.afiseazaInfo();
-            break;
-        }
-        case 7:
-        {
-            int ram;
-            cout << "Introdu cantitatea de RAM (GB): ";
-            if (!(cin >> ram))
-            {
-                cout << "Eroare: Trebuie sa introduci un numar valid pentru RAM!\n";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                break;
-            }
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        case 6: {
+    string procesor;
+    cout << "Introdu procesorul: ";
+    getline(cin, procesor);
+    auto rezultate = catalog.filtreazaDupaProcesor(procesor);
+    if (rezultate.empty()) cout << "Nu s-au gasit laptopuri cu procesorul " << procesor << ".\n";
+    else catalog.afiseazaLaptopuriPaginat(rezultate);
+    break;
+}
 
-            auto rezultate = catalog.filtreazaDupaRAM(ram);
-            if (rezultate.empty())
-                cout << "Nu s-au gasit laptopuri cu " << ram << " GB RAM.\n";
-            else
-                for (const auto& lap : rezultate)
-                    lap.afiseazaInfo();
-            break;
-        }
+        case 7: {
+    int ram;
+    cout << "Introdu cantitatea de RAM (GB): ";
+    cin >> ram;
+    cin.ignore(); // curăță bufferul
+    auto rezultate = catalog.filtreazaDupaRAM(ram);
+    if (rezultate.empty()) cout << "Nu s-au gasit laptopuri cu " << ram << " GB RAM.\n";
+    else catalog.afiseazaLaptopuriPaginat(rezultate);
+    break;
+}
 
-        case 8:
-        {
-            string gpu;
-            cout << "Introdu denumirea placii video: ";
-            getline(cin, gpu);
-            auto rezultate = catalog.filtreazaDupaPlacaVideo(gpu);
-            if (rezultate.empty()) cout << "Nu s-au gasit laptopuri cu placa video " << gpu << ".\n";
-            else for (const auto& lap : rezultate) lap.afiseazaInfo();
-            break;
-        }
+        case 8: {
+    string placaVideo;
+    cout << "Introdu placa video: ";
+    getline(cin, placaVideo);
+    auto rezultate = catalog.filtreazaDupaPlacaVideo(placaVideo);
+    if (rezultate.empty()) cout << "Nu s-au gasit laptopuri cu placa video " << placaVideo << ".\n";
+    else catalog.afiseazaLaptopuriPaginat(rezultate);
+    break;
+}
+
         case 9:
             catalog.salveazaInFisier("laptopuri.txt");
             cout << "Review-urile au fost salvate.\n";
@@ -395,24 +374,26 @@ int main()
         afiseazaMeniuPrincipal();
         getline(cin, rol);
 
-        if (rol == "iesire")
+        for (auto& c : rol) c = tolower(c);
+
+        if (rol == "3" || rol == "iesire")
         {
             cout << "Iesire din program.\n";
             break;
         }
-        else if (rol == "administrator")
+        else if (rol == "1" || rol == "administrator")
         {
             clearConsole();
             meniuAdministrator(catalog);
         }
-        else if (rol == "utilizator")
+        else if (rol == "2" || rol == "utilizator")
         {
             clearConsole();
             meniuUtilizator(catalog);
         }
         else
         {
-            cout << "Rol invalid! Te rog introdu 'administrator', 'utilizator' sau 'iesire'.\n";
+            cout << "Rol invalid! Te rog introdu '1' sau 'administrator', '2' sau 'utilizator', ori '3' sau 'iesire'.\n";
         }
     }
     return 0;

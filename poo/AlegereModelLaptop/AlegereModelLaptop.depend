@@ -70,7 +70,7 @@
 1743973946 source:e:\poo\alegerelaptop-main\poo\alegeremodellaptop\src\review.cpp
 	"Review.h"
 
-1748799390 source:c:\users\vali\desktop\alegerelaptop-main\poo\alegeremodellaptop\main.cpp
+1748802087 source:c:\users\vali\desktop\alegerelaptop-main\poo\alegeremodellaptop\main.cpp
 	<iostream>
 	<string>
 	<limits>
@@ -89,11 +89,11 @@
 	<string>
 	<iostream>
 
-1748799390 c:\users\vali\desktop\alegerelaptop-main\poo\alegeremodellaptop\include\catalog.h
+1748801875 c:\users\vali\desktop\alegerelaptop-main\poo\alegeremodellaptop\include\catalog.h
 	<vector>
 	"Laptop.h"
 
-1748799390 source:c:\users\vali\desktop\alegerelaptop-main\poo\alegeremodellaptop\src\catalog.cpp
+1748802004 source:c:\users\vali\desktop\alegerelaptop-main\poo\alegeremodellaptop\src\catalog.cpp
 	"Catalog.h"
 	<iostream>
 	<algorithm>

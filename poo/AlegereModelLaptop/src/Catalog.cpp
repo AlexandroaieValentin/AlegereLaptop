@@ -171,4 +171,41 @@ vector<Laptop> Catalog::filtreazaDupaPlacaVideo(const string& placaVideo) const 
     return rezultate;
 }
 
+void Catalog::afiseazaLaptopuriPaginat(const vector<Laptop>& lista, int pePagina) const {
+    if (lista.empty()) {
+        cout << "Nu exista laptopuri de afisat.\n";
+        return;
+    }
+
+    int total = lista.size();
+    int pagini = (total + pePagina - 1) / pePagina;
+    int paginaCurenta = 0;
+
+    while (true) {
+        system("cls"); // sterge consola pentru o afisare mai clara (sau poti comenta pe Linux)
+
+        cout << "Pagina " << paginaCurenta + 1 << " din " << pagini << "\n";
+        cout << "--------------------------------------\n";
+
+        int start = paginaCurenta * pePagina;
+        int end = min(start + pePagina, total);
+
+        for (int i = start; i < end; ++i) {
+            lista[i].afiseazaInfo();
+            cout << "--------------------------------------\n";
+        }
+
+        cout << "Navigare: [n] | [p]| [x]\n>> ";
+        string optiune;
+        getline(cin, optiune);
+
+        if (optiune == "n" && paginaCurenta < pagini - 1)
+            paginaCurenta++;
+        else if (optiune == "p" && paginaCurenta > 0)
+            paginaCurenta--;
+        else if (optiune == "x")
+            break;
+    }
+}
+
 
